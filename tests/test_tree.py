@@ -7,47 +7,32 @@ edges = [('a','c'), ('e','g'), ('e','i'), ('e','a'), ('g','b'), ('a','d'), ('d',
 tree = Tree(edges)
 
 tree.build_from_edges()
-''''
->>> tree.root.value
-'e'
 
->>> [node.value for node in tree.root.children]
-['a', 'i', 'g']
+print('Does all this work?')
 
-# you may need to change the output of this test (and future tests)
-# for example, if you have ['g', 'i', 'a'], then that's fine
+assert tree.root.value == 'e'
 
->>> [node.value for node in tree.root.children[0].children] # children of a
-['c', 'd']
+assert [node.value for node in tree.root.children] == ['g', 'i', 'a']
 
-# you may need to change the output of this test (and future tests)
-# for example, if you had ['g', 'i', 'a'] earlier, then the 
-# output would be the children of 'g', which is just ['b']
 
->>> [node.value for node in tree.root.children[1].children] # children of i
-[]
+assert [node.value for node in tree.root.children[0].children] == ['b']
 
->>> [node.value for node in tree.root.children[2].children] # children of g
-['b']
+assert [node.value for node in tree.root.children[1].children] == []
 
->>> [node.value for node in tree.root.children[0].children[0].children] # children of c
-['k']
+assert [node.value for node in tree.root.children[2].children] == ['c', 'd']
 
->>> [node.value for node in tree.root.children[0].children[1].children] # children of d
-['j', 'f']
+assert [node.value for node in tree.root.children[2].children[0].children] == ['k']
 
->>> [node.value for node in tree.root.children[2].children[0].children] # children of b
-[]
+assert [node.value for node in tree.root.children[2].children[1].children] == ['f', 'j']
 
->>> [node.value for node in tree.root.children[0].children[0].children[0].children] # children of k
-[]
+assert [node.value for node in tree.root.children[0].children[0].children] == []
 
->>> [node.value for node in tree.root.children[0].children[1].children[0].children] # children of j
-[]
+assert [node.value for node in tree.root.children[2].children[0].children[0].children] == []
 
->>> [node.value for node in tree.root.children[0].children[1].children[1].children] # children of f
-['h']
+assert [node.value for node in tree.root.children[2].children[1].children[1].children] == []
 
->>> [node.value for node in tree.root.children[0].children[1].children[1].children[0].children] # children of f
-[]
-'''
+assert [node.value for node in tree.root.children[2].children[1].children[0].children] == ['h']
+
+assert [node.value for node in tree.root.children[2].children[1].children[0].children[0].children] == []
+
+print('Looks like it!')

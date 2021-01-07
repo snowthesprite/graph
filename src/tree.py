@@ -1,7 +1,7 @@
 class Node :
     def __init__(self, data) :
         self.value = data
-        self.child = []
+        self.children = []
 
 class Tree :
     def __init__(self, edges) :
@@ -30,9 +30,14 @@ class Tree :
                     return list(parent_child)
 
     def build_from_edges(self) :
-        child = self.get_children(self.root.value, self.edges)
-        print(root_child)
-        iteration = 0
-        while iteration < 1 :
-            parent = 
-            iteration += 1
+        node_array = [self.root]
+        while node_array != [] :
+            child_array = []
+            for node in node_array :
+                node_child_array = []
+                children = self.get_children(node.value, self.edges)
+                for child in children :
+                    child_array.append(Node(child))
+                    node_child_array.append(Node(child))
+                node.children = node_child_array
+            node_array = node_child_array
