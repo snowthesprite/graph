@@ -41,3 +41,11 @@ class Tree :
                     node_child_array.append(Node(child))
                 node.children = node_child_array
             node_array = node_child_array
+
+    def print_breadth_first(self) : 
+        queue = [self.root]
+        while queue != [] :
+            print(queue[0])
+            for child in self.get_children(queue[0], self.edges) :
+                queue.append(child) :
+            queue.pop(0)
