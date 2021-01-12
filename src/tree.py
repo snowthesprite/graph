@@ -50,3 +50,12 @@ class Tree :
             for child in children :
                 queue.append(child)
             queue.pop(0)
+
+    def print_depth_first(self) : 
+        stack = [self.root]
+        while stack != [] :
+            print(stack[len(stack) - 1].value)
+            children = stack[len(stack) -1].children
+            stack.pop(len(stack) - 1)
+            for child in children :
+                stack.append(child)

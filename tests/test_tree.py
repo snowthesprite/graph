@@ -40,4 +40,13 @@ print('Looks like it!')
 edges = [('a','c'), ('e','g'), ('e','i'), ('e','a'), ('d','b'), ('a','d'), ('d','f'), ('f','h'), ('d','j'), ('d','k')]
 tree = Tree(edges)
 tree.build_from_edges()
+
+print('Printing the tree going by breadth')
+
 tree.print_breadth_first()
+print()
+
+print('Printing the tree going by depth')
+
+tree.print_depth_first()
+print()
