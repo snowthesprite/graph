@@ -45,7 +45,8 @@ class Tree :
     def print_breadth_first(self) : 
         queue = [self.root]
         while queue != [] :
-            print(queue[0])
-            for child in self.get_children(queue[0], self.edges) :
-                queue.append(child) :
+            print(queue[0].value)
+            children = queue[0].children
+            for child in children :
+                queue.append(child)
             queue.pop(0)

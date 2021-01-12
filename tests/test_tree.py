@@ -36,3 +36,8 @@ assert [node.value for node in tree.root.children[2].children[1].children[0].chi
 assert [node.value for node in tree.root.children[2].children[1].children[0].children[0].children] == []
 
 print('Looks like it!')
+
+edges = [('a','c'), ('e','g'), ('e','i'), ('e','a'), ('d','b'), ('a','d'), ('d','f'), ('f','h'), ('d','j'), ('d','k')]
+tree = Tree(edges)
+tree.build_from_edges()
+tree.print_breadth_first()
