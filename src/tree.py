@@ -42,20 +42,24 @@ class Tree :
                 node.children = node_child_array
             node_array = node_child_array
 
-    def print_breadth_first(self) : 
+    def nodes_breadth_first(self) : 
         queue = [self.root]
+        sorted_nodes = []
         while queue != [] :
-            print(queue[0].value)
+            sorted_nodes.append(queue[0])
             children = queue[0].children
             for child in children :
                 queue.append(child)
             queue.pop(0)
+        return sorted_nodes
 
-    def print_depth_first(self) : 
+    def nodes_depth_first(self) : 
         stack = [self.root]
+        sorted_nodes = []
         while stack != [] :
-            print(stack[len(stack) - 1].value)
+            sorted_nodes.append(stack[len(stack) - 1])
             children = stack[len(stack) -1].children
             stack.pop(len(stack) - 1)
             for child in children :
                 stack.append(child)
+        return sorted_nodes
