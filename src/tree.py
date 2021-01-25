@@ -42,6 +42,8 @@ class Tree :
             for node in node_array :
                 node_child_array = []
                 children = self.get_children(node.value, self.edges)
+                if children == [] :
+                    children = self.get_children(node.index, self.edges)
                 for child in children :
                     child_array.append(Node(child, self.node_vals))
                     node_child_array.append(Node(child, self.node_vals))
