@@ -2,9 +2,11 @@ import sys
 sys.path.append('src')
 from tree import Tree
 
+node_values = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k']
+
 edges = [('a','c'), ('e','g'), ('e','i'), ('e','a'), ('g','b'), ('a','d'), ('d','f'), ('f','h'), ('d','j'), ('c','k')]
 
-tree = Tree(edges)
+tree = Tree(edges, node_values)
 
 tree.build_from_edges()
 
@@ -39,7 +41,7 @@ print('Looks like it!')
 print()
 
 edges = [('a','c'), ('e','g'), ('e','i'), ('e','a'), ('d','b'), ('a','d'), ('d','f'), ('f','h'), ('d','j'), ('d','k')]
-tree = Tree(edges)
+tree = Tree(edges, node_values)
 tree.build_from_edges()
 
 print('Does nodes_breadth_first work?')
