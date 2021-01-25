@@ -33,7 +33,7 @@ class Tree :
             for parent_child in pair :
                 check = self.get_parents(parent_child, tree_list)
                 if check == [] :
-                    return list(parent_child)
+                    return [parent_child]
 
     def build_from_edges(self) :
         node_array = [self.root]
