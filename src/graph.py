@@ -1,7 +1,9 @@
 class Node :
     def __init__(self, index) :
         self.index = index
-        self.neighbors = []
+        self.neighbors = None
+        self.distance = 0
+        self.previous = None
 
 class Graph :
     def __init__(self, edges) :
@@ -58,5 +60,21 @@ class Graph :
             stack.remove(s_index)
         return [self.nodes[sorted] for sorted in sorted_stack]
 
+    def set_breadth_first_distance_and_previous(self, starting_node_index) :
+        node_order = self.get_nodes_breadth_first(starting_node_index)
+        current_node = node_order[0]
+        current_node.distance = 0
+        index = 1
+        while index < len(node_order) :
+            next_node = node_order[index]
+            for neighbor in next_node.neighbors :
+                if neighbor.distance != current_node.distance + 1 and neighbor.index != current_node.index:
+                    print(neighbor.index, current_node.index, next_node.index)
+                    next_node.previous = current_node
+                    next_node.distance = current_node.distance + 1
+            current_node = next_node
+            index += 1
+
     def calc_distance(self, starting_node_index, ending_node_index) :
-        pass
+        self.set_breadth_first_distance_and_previous(starting_node_index)
+        return self.nodes[ending_node_index].distance
