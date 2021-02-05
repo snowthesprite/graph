@@ -8,10 +8,14 @@ class Node :
 class Graph :
     def __init__(self, edges) :
         self.edges = edges
-        nodes = self.build_from_edges()
-        self.nodes = [0 for _ in range(len(nodes))]
-        for node in nodes :
-            self.nodes[node.index] = node
+        max = 0
+        for pair in self.edges :
+            if pair[0] > max :
+                max = pair[0]
+            elif pair[1] > max :
+                max = pair[1]
+        self.nodes = [Node(index) for index in range(max + 1)]
+        self.build_from_edges()
     
     def find_neighbors(self, home) :
         neighbors = []
@@ -23,16 +27,15 @@ class Graph :
         return neighbors
 
     def build_from_edges(self) :
-        node_array = [Node(self.edges[0][0])]
+        node_array = [self.nodes[0]]
         visited = []
         while node_array != [] :
             for node in node_array :
                 visited.append(node)
                 neighbors = self.find_neighbors(node.index)
-                node_neighbors = [Node(neighbor) for neighbor in neighbors]
+                node_neighbors = [self.nodes[neigh_index] for neigh_index in neighbors]
                 node.neighbors = node_neighbors
             node_array = [neighbor for neighbor in node_neighbors if neighbor.index not in [visit.index for visit in visited]]
-        return visited
 
     def get_nodes_breadth_first(self, start) : 
         queue = [start]
@@ -62,17 +65,17 @@ class Graph :
 
     def set_breadth_first_distance_and_previous(self, starting_node_index) :
         node_order = self.get_nodes_breadth_first(starting_node_index)
-        current_node = node_order[0]
+        current_node = self.nodes[node_order[0].index]
         current_node.distance = 0
+        current_node.previous = None
         index = 1
         while index < len(node_order) :
-            next_node = node_order[index]
-            for neighbor in next_node.neighbors :
-                if neighbor.distance != current_node.distance + 1 and neighbor.index != current_node.index:
-                    print(neighbor.index, current_node.index, next_node.index)
-                    next_node.previous = current_node
-                    next_node.distance = current_node.distance + 1
-            current_node = next_node
+            for neighbor in current_node.neighbors :
+                neigh_index = neighbor.index
+                if current_node.previous == None or neighbor.previous != current_node.previous and neigh_index != current_node.previous.index :
+                    self.nodes[neigh_index].previous = current_node
+                    self.nodes[neigh_index].distance = current_node.distance + 1
+            current_node = self.nodes[node_order[index].index]
             index += 1
 
     def calc_distance(self, starting_node_index, ending_node_index) :

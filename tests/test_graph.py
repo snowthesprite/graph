@@ -21,9 +21,7 @@ print('Yes they do!')
 edges = [(0,1),(1,2),(1,3),(3,4),(1,4),(4,5)]
 graph = Graph(edges)
 
-print('answer', graph.calc_distance(5,2))
-
-#assert graph.calc_distance(0,4) == 2
+assert graph.calc_distance(0,4) == 2
 
 assert graph.calc_distance(5,2) == 3
 
