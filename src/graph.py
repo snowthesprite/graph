@@ -81,3 +81,15 @@ class Graph :
     def calc_distance(self, starting_node_index, ending_node_index) :
         self.set_breadth_first_distance_and_previous(starting_node_index)
         return self.nodes[ending_node_index].distance
+
+    def calc_shortest_path(self, starting_node_index, ending_node_index) :
+        self.set_breadth_first_distance_and_previous(starting_node_index)
+        current_node = self.nodes[ending_node_index] 
+        short_path = []
+        while True :
+            short_path.append(current_node.index)
+            if current_node.index == starting_node_index :
+                break
+            current_node = current_node.previous
+        short_path.reverse()
+        return short_path

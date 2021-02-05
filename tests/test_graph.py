@@ -16,10 +16,12 @@ assert [node.index for node in bf] == [2, 1, 0, 3, 4, 5], 'Breadth first does no
 
 assert [node.index for node in df] == [2, 1, 4, 5, 3, 0], 'Depth first does not work'
 
-print('Yes they do!')
+print('Yes they do!', "\n")
 
 edges = [(0,1),(1,2),(1,3),(3,4),(1,4),(4,5)]
 graph = Graph(edges)
+
+print('Does calc_distance work?')
 
 assert graph.calc_distance(0,4) == 2
 
@@ -31,13 +33,18 @@ assert graph.calc_distance(4,1) == 1
 
 assert graph.calc_distance(3,3) == 0
 
+print('Yes', "\n" )
 
-#assert graph.calc_shortest_path(0,4) == [0, 1, 4]
+print('Does calc_shortest_path work?')
 
-#assert graph.calc_shortest_path(5,2) == [5, 4, 1, 2]
+assert graph.calc_shortest_path(0,4) == [0, 1, 4]
 
-#assert graph.calc_shortest_path(0,5) == [0, 1, 4, 5]
+assert graph.calc_shortest_path(5,2) == [5, 4, 1, 2]
 
-#assert graph.calc_shortest_path(4,1) == [4, 1]
+assert graph.calc_shortest_path(0,5) == [0, 1, 4, 5]
 
-#assert graph.calc_shortest_path(3,3) == [3]
+assert graph.calc_shortest_path(4,1) == [4, 1]
+
+assert graph.calc_shortest_path(3,3) == [3]
+
+print('Yes', "\n")
