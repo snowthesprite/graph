@@ -1,6 +1,7 @@
 class Node :
     def __init__(self, index) :
         self.index = index
+        self.distance = 0
         self.children = []
         self.parents = []
 
@@ -61,33 +62,38 @@ class DirectedGraph :
                     stack.append(child)
         return sorted_nodes
 
-    def set_breadth_first_distance_and_previous(self, starting_node_index) :
-        node_order = self.get_nodes_breadth_first(starting_node_index)
+    def set_breadth_first_distance(self, starting_node_index) :
+        node_order = self.nodes_breadth_first(starting_node_index)
         current_node = self.nodes[node_order[0].index]
+        visited = [current_node.index]
         current_node.distance = 0
-        current_node.previous = None
-        index = 1
-        while index < len(node_order) :
-            for neighbor in current_node.neighbors :
-                neigh_index = neighbor.index
-                if current_node.previous == None or neighbor.previous != current_node.previous and neigh_index != current_node.previous.index :
-                    self.nodes[neigh_index].previous = current_node
-                    self.nodes[neigh_index].distance = current_node.distance + 1
+        for index in range(1, len(node_order)) :
+            for child in current_node.children :
+                if child.index not in visited :
+                    self.nodes[child.index].distance = current_node.distance + 1
+                    visited.append(child.index)
             current_node = self.nodes[node_order[index].index]
-            index += 1
 
     def calc_distance(self, starting_node_index, ending_node_index) :
-        self.set_breadth_first_distance_and_previous(starting_node_index)
+        if self.nodes[starting_node_index].children == [] :
+            return False
+        self.set_breadth_first_distance(starting_node_index)
         return self.nodes[ending_node_index].distance
 
     def calc_shortest_path(self, starting_node_index, ending_node_index) :
-        self.set_breadth_first_distance_and_previous(starting_node_index)
+        if self.nodes[starting_node_index].children == [] :
+            return False
+        self.set_breadth_first_distance(starting_node_index)
         current_node = self.nodes[ending_node_index] 
         short_path = []
         while True :
             short_path.append(current_node.index)
             if current_node.index == starting_node_index :
                 break
-            current_node = current_node.previous
+            for parent in current_node.parents :
+                if parent.distance == current_node.distance - 1 :
+                    current_node = self.nodes[parent.index]
+                elif parent.distance == current_node.distance :
+                    current_node = self.nodes[starting_node_index]
         short_path.reverse()
         return short_path
