@@ -14,26 +14,17 @@ class Tree :
         self.root = Node(self.get_root(edges)[0], self.node_vals)
         self.edges = edges
 
-    def get_children(self, parent, tree_list) :
-        children = []
-        for pair in tree_list: 
-            if pair[0] == parent :
-                children.append(pair[1])
-        return children
+    def get_children(self, parent) :
+        return [pair[1] for pair in self.edges if pair[0] == parent]
 
-    def get_parents(self, child, tree_list) :
-        parents = []
-        for pair in tree_list :
-            if pair[1] == child :
-                parents.append(pair[0])
-        return parents
+    def get_parents(self, child) :
+        return [pair[0] for pair in self.edges if pair[1] == child]
 
     def get_root(self, tree_list) :
         for pair in tree_list :
-            for parent_child in pair :
-                check = self.get_parents(parent_child, tree_list)
-                if check == [] :
-                    return [parent_child]
+            check = self.get_parents(pair[0])
+            if check == [] :
+                return [pair[0]]
 
     def build_from_edges(self) :
         node_array = [self.root]
@@ -41,9 +32,9 @@ class Tree :
             child_array = []
             for node in node_array :
                 node_child_array = []
-                children = self.get_children(node.value, self.edges)
+                children = self.get_children(node.value)
                 if children == [] :
-                    children = self.get_children(node.index, self.edges)
+                    children = self.get_children(node.index)
                 for child in children :
                     child_array.append(Node(child, self.node_vals))
                     node_child_array.append(Node(child, self.node_vals))

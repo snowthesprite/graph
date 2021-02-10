@@ -27,15 +27,10 @@ class Graph :
         return neighbors
 
     def build_from_edges(self) :
-        node_array = [self.nodes[0]]
-        visited = []
-        while node_array != [] :
-            for node in node_array :
-                visited.append(node)
-                neighbors = self.find_neighbors(node.index)
-                node_neighbors = [self.nodes[neigh_index] for neigh_index in neighbors]
-                node.neighbors = node_neighbors
-            node_array = [neighbor for neighbor in node_neighbors if neighbor.index not in [visit.index for visit in visited]]
+        for node in self.nodes :
+            neighbors = self.find_neighbors(node.index)
+            node_neighbors = [self.nodes[neigh_index] for neigh_index in neighbors]
+            node.neighbors = node_neighbors
 
     def get_nodes_breadth_first(self, start) : 
         queue = [start]
