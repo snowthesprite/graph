@@ -14,9 +14,8 @@ weights = {
     (4,8): 8,
     (8,0): 4
 }
-#vertex_values = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
-#weighted_graph = WeightedGraph(weights, vertex_values)
-weighted_graph = WeightedGraph(weights)
+vertex_values = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
+weighted_graph = WeightedGraph(weights, vertex_values)
 
 print('Does the weighted_graphs calc_distance work?')
 
