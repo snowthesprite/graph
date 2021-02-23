@@ -21,7 +21,7 @@ class WeightedGraph (Graph) :
         self.nodes = [Node(index, self.v_vals) for index in range(max + 1)]
         self.build_from_edges()
 
-    def set_breadth_first_distance_and_previous(self, starting_node_index) :
+    def set_breadth_first_distance(self, starting_node_index) :
         node_order = self.get_nodes_breadth_first(starting_node_index)
         current_node = self.nodes[node_order[0].index]
         current_node.distance = 0
@@ -36,3 +36,18 @@ class WeightedGraph (Graph) :
                 if current_node.distance + weight < neighbor.distance :
                     self.nodes[neigh_index].distance = current_node.distance + weight
             current_node = self.nodes[node_order[index].index]
+    
+    def calc_distance(self, starting_node_index, ending_node_index) :
+        self.set_breadth_first_distance(starting_node_index)
+        return self.nodes[ending_node_index].distance
+    
+    def calc_shortest_path(self, starting_node_index, ending_node_index) :
+        self.set_breadth_first_distance(starting_node_index)
+        short_path = []
+        for pair in self.edges :
+            a = pair[0]
+            b = pair[1] 
+            if abs(self.nodes[a].distance - self.nodes[b].distance) == self.weights[(a, b)] :
+                short_path.append((a,b))
+        g_short_path = Graph(short_path)
+        return g_short_path.calc_shortest_path(starting_node_index, ending_node_index)
