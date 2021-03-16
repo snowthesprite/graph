@@ -8,13 +8,11 @@ class Node :
 class Graph :
     def __init__(self, edges) :
         self.edges = edges
-        max = 0
-        for pair in self.edges :
-            if pair[0] > max :
-                max = pair[0]
-            elif pair[1] > max :
-                max = pair[1]
-        self.nodes = [Node(index) for index in range(max + 1)]
+        indicies = []
+        for (a,b) in self.edges :
+            indicies.extend([a,b])
+        maximum = max(indicies)
+        self.nodes = [Node(index) for index in range(maximum + 1)]
         self.build_from_edges()
     
     def find_neighbors(self, home) :

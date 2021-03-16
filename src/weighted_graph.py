@@ -12,13 +12,11 @@ class WeightedGraph (Graph) :
         self.weights = weights
         self.v_vals = vertex_vals
         self.edges = list(self.weights.keys())
-        max = 0
-        for pair in self.edges :
-            if pair[0] > max :
-                max = pair[0]
-            elif pair[1] > max :
-                max = pair[1]
-        self.nodes = [Node(index, self.v_vals) for index in range(max + 1)]
+        indicies = []
+        for (a,b) in self.edges :
+            indicies.extend([a,b])
+        maximum = max(indicies)
+        self.nodes = [Node(index, self.v_vals) for index in range(maximum + 1)]
         self.build_from_edges()
 
     def set_breadth_first_distance(self, starting_node_index) :
