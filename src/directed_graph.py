@@ -16,10 +16,10 @@ class DirectedGraph :
         self.build_from_edges()
 
     def get_children(self, parent) :
-        return [pair[1] for pair in self.edges if pair[0] == parent]
+        return [kid for (guardian, kid) in self.edges if guardian == parent]
 
     def get_parents(self, child) :
-        return [pair[0] for pair in self.edges if pair[1] == child]
+        return [guardian for (guardian, kid) in self.edges if kid == child]
 
     def build_from_edges(self) :
         for node in self.nodes :

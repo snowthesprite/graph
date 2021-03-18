@@ -15,10 +15,10 @@ class Tree :
         self.edges = edges
 
     def get_children(self, parent) :
-        return [pair[1] for pair in self.edges if pair[0] == parent]
+        return [kid for (guardian, kid) in self.edges if guardian == parent]
 
     def get_parents(self, child) :
-        return [pair[0] for pair in self.edges if pair[1] == child]
+        return [guardian for (guardian, kid) in self.edges if kid == child]
 
     def get_root(self, tree_list) :
         for pair in tree_list :

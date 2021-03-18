@@ -42,9 +42,7 @@ class WeightedGraph (Graph) :
     def calc_shortest_path(self, starting_node_index, ending_node_index) :
         self.set_breadth_first_distance(starting_node_index)
         short_path = []
-        for pair in self.edges :
-            a = pair[0]
-            b = pair[1] 
+        for (a,b) in self.edges :
             if abs(self.nodes[a].distance - self.nodes[b].distance) == self.weights[(a, b)] :
                 short_path.append((a,b))
         g_short_path = Graph(short_path)

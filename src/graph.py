@@ -17,11 +17,11 @@ class Graph :
     
     def find_neighbors(self, home) :
         neighbors = []
-        for pair in self.edges: 
-            if pair[0] == home :
-                neighbors.append(pair[1])
-            elif pair[1] == home :
-                neighbors.append(pair[0])
+        for (neigh_0, neigh_1) in self.edges: 
+            if neigh_0 == home :
+                neighbors.append(neigh_1)
+            elif neigh_1 == home :
+                neighbors.append(neigh_0)
         return neighbors
 
     def build_from_edges(self) :
