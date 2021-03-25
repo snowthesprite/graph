@@ -11,8 +11,7 @@ class DirectedGraph :
         indicies = []
         for (a,b) in self.edges :
             indicies.extend([a,b])
-        maximum = max(indicies)
-        self.nodes = [Node(index) for index in range(maximum + 1)]
+        self.nodes = [Node(index) for index in range(max(indicies) + 1)]
         self.build_from_edges()
 
     def get_children(self, parent) :
@@ -28,7 +27,7 @@ class DirectedGraph :
             node.parents = [self.nodes[parent_index] for parent_index in parents]
             node.children = [self.nodes[child_index] for child_index in children]
     
-    def nodes_breadth_first(self,start) : 
+    def nodes_breadth_first(self,start =0) : 
         queue = [self.nodes[start]]
         sorted_nodes = []
         while queue != [] :
@@ -40,7 +39,7 @@ class DirectedGraph :
             queue.pop(0)
         return sorted_nodes
 
-    def nodes_depth_first(self,start) : 
+    def nodes_depth_first(self,start=0) : 
         stack = [self.nodes[start]]
         sorted_nodes = []
         while stack != [] :

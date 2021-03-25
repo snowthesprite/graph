@@ -15,8 +15,7 @@ class WeightedGraph (Graph) :
         indicies = []
         for (a,b) in self.edges :
             indicies.extend([a,b])
-        maximum = max(indicies)
-        self.nodes = [Node(index, self.v_vals) for index in range(maximum + 1)]
+        self.nodes = [Node(index, self.v_vals) for index in range(max(indicies)+ 1)]
         self.build_from_edges()
 
     def set_breadth_first_distance(self, starting_node_index) :

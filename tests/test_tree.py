@@ -8,14 +8,13 @@ edges = [('a','c'), ('e','g'), ('e','i'), ('e','a'), ('g','b'), ('a','d'), ('d',
 
 tree = Tree(edges, node_values)
 
-tree.build_from_edges()
+#tree.build_from_edges()
 
 print('Does all this work?')
 
 assert tree.root.value == 'e'
 
 assert set(node.value for node in tree.root.children) == {'g', 'i', 'a'}
-
 
 assert set(node.value for node in tree.root.children[0].children) == {'b'}
 
@@ -42,7 +41,7 @@ print()
 
 edges = [('a','c'), ('e','g'), ('e','i'), ('e','a'), ('d','b'), ('a','d'), ('d','f'), ('f','h'), ('d','j'), ('d','k')]
 tree = Tree(edges, node_values)
-tree.build_from_edges()
+#tree.build_from_edges()
 
 print('Does nodes_breadth_first work?')
 nodes = tree.nodes_breadth_first()
@@ -63,7 +62,7 @@ node_values = ['a', 'b', 'a', 'a', 'a', 'b', 'a', 'b', 'a', 'b', 'b']
 edges = [(0,2), (4,6), (4,8), (4,0), (3,1), (0,3), (3,5), (5,7), (3,9), (3,10)]
 
 tree = Tree(edges, node_values)
-tree.build_from_edges()
+#tree.build_from_edges()
 
 print('Is the root node correct?')
 

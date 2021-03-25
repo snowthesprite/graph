@@ -11,8 +11,7 @@ class Graph :
         indicies = []
         for (a,b) in self.edges :
             indicies.extend([a,b])
-        maximum = max(indicies)
-        self.nodes = [Node(index) for index in range(maximum + 1)]
+        self.nodes = [Node(index) for index in range(max(indicies) + 1)]
         self.build_from_edges()
     
     def find_neighbors(self, home) :
@@ -61,15 +60,13 @@ class Graph :
         current_node = self.nodes[node_order[0].index]
         current_node.distance = 0
         current_node.previous = None
-        index = 1
-        while index < len(node_order) :
+        for index in range(1,len(node_order)) :
             for neighbor in current_node.neighbors :
                 neigh_index = neighbor.index
                 if current_node.previous == None or neighbor.previous != current_node.previous and neigh_index != current_node.previous.index :
                     self.nodes[neigh_index].previous = current_node
                     self.nodes[neigh_index].distance = current_node.distance + 1
             current_node = self.nodes[node_order[index].index]
-            index += 1
 
     def calc_distance(self, starting_node_index, ending_node_index) :
         self.set_breadth_first_distance_and_previous(starting_node_index)
